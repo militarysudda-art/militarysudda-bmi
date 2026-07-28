@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<img src=".png" class="logo">
+
+<title>Military Sudda BMI Calculator</title>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+background:#111;
+font-family:'Noto Sans Sinhala',sans-serif;
+color:white;
+}
+
+.container{
+width:500px;
+max-width:95%;
+margin:30px auto;
+background:#1d1d1d;
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 25px #000;
+text-align:center;
+}
+
+.logo{
+width:180px;
+margin-bottom:15px;
+}
+
+h2{
+color:#ffd54f;
+}
+
+input,select{
+
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:15px;
+font-size:16px;
+border:none;
+border-radius:10px;
+}
+
+.row{
+display:flex;
+gap:10px;
+}
+
+button{
+background:#00897b;
+color:white;
+padding:15px;
+width:100%;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#00695c;
+}
+
+#result{
+margin-top:25px;
+font-size:18px;
+line-height:35px;
+}
+
+.scale{
+margin-top:30px;
+height:35px;
+border-radius:30px;
+overflow:hidden;
+display:flex;
+}
+
+.scale div{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:13px;
+font-weight:bold;
+color:#fff;
+}
+
+.u{
+background:#3498db;
+}
+
+.n{
+background:#2ecc71;
+}
+
+.o{
+background:#f1c40f;
+color:#000;
+}
+
+.ob{
+background:#e74c3c;
+}
+
+.pointer{
+height:20px;
+width:4px;
+background:white;
+margin:auto;
+position:relative;
+top:-2px;
+}
+
+footer{
+margin-top:25px;
+font-size:13px;
+color:#bbb;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="logo.png" class="logo">
+
+<h2>Military Sudda BMI Calculator</h2>
+
+<select id="gender">
+<option>පුරුෂ</option>
+<option>ස්ත්‍රී</option>
+</select>
+
+<input type="number" id="age" placeholder="වයස">
+
+<div class="row">
+<input type="number" id="feet" placeholder="උස (අඩි)">
+<input type="number" id="inch" placeholder="අඟල්">
+</div>
+
+<input type="number" id="weight" placeholder="බර (Kg)">
+
+<button onclick="calcBMI()">BMI ගණනය කරන්න</button>
+
+<div id="result"></div>
+
+<div class="pointer" id="pointer"></div>
+
+<div class="scale">
+
+<div class="u">අඩු</div>
+
+<div class="n">සාමාන්‍ය</div>
+
+<div class="o">වැඩි</div>
+
+<div class="ob">තරබාරු</div>
+
+</div>
+
+<footer>
+
+© Military Sudda
+
+</footer>
+
+</div>
+
+<script>
+
+function calcBMI(){
+
+let feet=parseFloat(document.getElementById("feet").value);
+
+let inch=parseFloat(document.getElementById("inch").value);
+
+let weight=parseFloat(document.getElementById("weight").value);
+
+if(isNaN(feet)||isNaN(inch)||isNaN(weight)){
+alert("කරුණාකර සියලුම දත්ත ඇතුළත් කරන්න.");
+return;
+}
+
+let totalInches=(feet*12)+inch;
+
+let meter=totalInches*0.0254;
+
+let bmi=weight/(meter*meter);
+
+let status="";
+
+if(bmi<18.5)
+status="අඩු බර";
+
+else if(bmi<25)
+status="සාමාන්‍ය බර";
+
+else if(bmi<30)
+status="වැඩි බර";
+
+else
+status="තරබාරු";
+
+let idealWeight=22*(meter*meter);
+
+let diff=weight-idealWeight;
+
+let message="";
+
+if(diff>0)
+message="සාමාන්‍ය BMI සඳහා තවත් <b>"+diff.toFixed(1)+" Kg</b> අඩු කළ යුතුය.";
+
+else if(diff<0)
+message="සාමාන්‍ය BMI සඳහා <b>"+Math.abs(diff).toFixed(1)+" Kg</b> වැඩි කළ යුතුය.";
+
+else
+message="ඔබගේ බර ඉතා හොඳයි.";
+
+document.getElementById("result").innerHTML=
+
+"<h3>BMI = "+bmi.toFixed(1)+"</h3>"+
+
+"<b>"+status+"</b><br><br>"+
+
+"සාමාන්‍ය බර විය යුත්තේ <b>"+idealWeight.toFixed(1)+" Kg</b><br><br>"+
+
+message;
+
+let percent=((bmi/40)*100);
+
+if(percent>100) percent=100;
+
+document.getElementById("pointer").style.marginLeft=percent+"%";
+
+}
+
+</script>
+
+</body>
+</html>
