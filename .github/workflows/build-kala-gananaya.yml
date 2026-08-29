@@ -1,6 +1,8 @@
 name: Build Military Sudda EXE
+
 on:
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: windows-latest
@@ -10,18 +12,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: npm
+          cache-dependency-path: kala-gananaya-exe/package-lock.json
+
       - name: Install dependencies
         run: npm install
+
       - name: Build Windows 32-bit x86 installer and portable EXE
         run: npm run build
+
+      - name: List build files
+        shell: powershell
+        run: Get-ChildItem -Path dist -File | Select-Object Name,Length
+
       - name: Upload x86 EXE files
         uses: actions/upload-artifact@v4
         with:
           name: Military-Sudda-Kala-Gananaya-Windows-x86
-          path: |
-            kala-gananaya-exe/dist/*x86.exe
-            kala-gananaya-exe/dist/*.exe
+          path: kala-gananaya-exe/dist/*.exe
+          if-no-files-found: error
