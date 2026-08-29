@@ -1,9 +1,9 @@
 {
   "name":"military-sudda-kala-gananaya",
-  "version":"1.0.0",
-  "description":"Military සුද්දා - කාල ගණනය Windows application",
+  "version":"1.0.1",
+  "description":"Military සුද්දා - කාල ගණනය Windows x86 application",
   "main":"main.js",
-  "scripts":{"start":"electron .","build":"electron-builder --win nsis portable"},
+  "scripts":{"start":"electron .","build":"electron-builder --win nsis portable --ia32"},
   "devDependencies":{"electron":"22.3.27","electron-builder":"23.6.0"},
-  "build":{"appId":"com.militarysudda.kalaganaya","productName":"Military සුද්දා - කාල ගණනය","files":["index.html","style.css","script.js","main.js","preload.js"],"win":{"target":["nsis","portable"],"artifactName":"Military-Sudda-Kala-Gananaya-${version}-${arch}.${ext}"},"nsis":{"oneClick":false,"allowToChangeInstallationDirectory":true,"createDesktopShortcut":true,"createStartMenuShortcut":true}}
+  "build":{"appId":"com.militarysudda.kalaganaya","productName":"Military සුද්දා - කාල ගණනය","files":["index.html","style.css","script.js","main.js","preload.js"],"win":{"target":["nsis","portable"],"arch":["ia32"],"artifactName":"Military-Sudda-Kala-Gananaya-${version}-x86.${ext}"},"nsis":{"oneClick":false,"allowToChangeInstallationDirectory":true,"createDesktopShortcut":true,"createStartMenuShortcut":true}}
 }
