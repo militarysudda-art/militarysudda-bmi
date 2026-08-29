@@ -16,11 +16,12 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm install
-      - name: Build Windows installer and portable EXE
+      - name: Build Windows 32-bit x86 installer and portable EXE
         run: npm run build
-      - name: Upload EXE files
+      - name: Upload x86 EXE files
         uses: actions/upload-artifact@v4
         with:
-          name: Military-Sudda-Kala-Gananaya-Windows
+          name: Military-Sudda-Kala-Gananaya-Windows-x86
           path: |
+            kala-gananaya-exe/dist/*x86.exe
             kala-gananaya-exe/dist/*.exe
